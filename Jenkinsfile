@@ -52,11 +52,12 @@ pipeline {
         stage('setting the Kubernetes Cluster') {
             steps {
                 withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awslogin', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                dir('terraform_files') {
-                    sh 'terraform init'
-                    sh 'terraform validate'
-                    sh 'terraform apply --auto-approve'
-                    sh 'sleep 20'
+                    dir('terraform_files') {
+                        sh 'terraform init'
+                        sh 'terraform validate'
+                        sh 'terraform apply --auto-approve'
+                        sh 'sleep 20'
+                    }
                 }
             }
         }

@@ -37,7 +37,15 @@ pipeline {
         }
         stage('AWS-Login') {
             steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'awslogin', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                withCredentials([
+                    aws(
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                        credentialsId: 'awslogin',
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                    )
+                ]) {
+                    echo 'Authenticating with AWS'
+                    sh 'aws sts get-caller-identity'
                 }
             }
         }

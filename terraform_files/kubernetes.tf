@@ -3,9 +3,9 @@ region = "us-east-1"
 }
 resource "aws_instance" "kubernetes-server" {
 ami = "ami-0bbdd8c17ed981ef9"
-instance_type = "t3.medium"
-vpc_security_group_ids =["sg-08348db6dca8c5940"]
-key_name = "sir"
+instance_type = "t2.medium"
+vpc_security_group_ids =["sg-0a3fb0d88a0848fff"]
+key_name = "LinuxUbuntu"
   root_block_device {
       volume_size = 20
       volume_type = "gp2"
@@ -31,7 +31,7 @@ connection {
 type = "ssh"
 host = self.public_ip
 user = "ubuntu"
-private_key = file("./sir.pem")
+private_key = file("./LinuxUbuntu.pem")
 }
 }
 }

@@ -65,8 +65,7 @@ pipeline {
         stage('deploy kubernetes') {
             steps {
                 sh 'chmod 600 ./terraform_files/LinuxUbuntu.pem'
-                sh 'minikube start'
-                sh 'sleep 30'
+                sh 'ssh -o StrictHostKeyChecking=no -i ./terraform_files/LinuxUbuntu.pem ubuntu@172.31.23.75 minikube start'
                 sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/LinuxUbuntu.pem deployment.yml ubuntu@172.31.23.75:/home/ubuntu/'
                 sh 'sudo scp -o StrictHostKeyChecking=no -i ./terraform_files/LinuxUbuntu.pem service.yml ubuntu@172.31.23.75:/home/ubuntu/'
                 script {
